@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fy-facebook-metrics/static/css/main.e8ca0021.css",
+    "main.js": "/fy-facebook-metrics/static/js/main.1820b601.js",
+    "index.html": "/fy-facebook-metrics/index.html",
+    "main.e8ca0021.css.map": "/fy-facebook-metrics/static/css/main.e8ca0021.css.map",
+    "main.1820b601.js.map": "/fy-facebook-metrics/static/js/main.1820b601.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e8ca0021.css",
+    "static/js/main.1820b601.js"
+  ]
+}
