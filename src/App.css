@@ -323,6 +323,61 @@ td a {
   font-size: 1.1rem;
 }
 
+/* Accordion rows */
+.clickable-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.clickable-row:hover {
+  background: #daeaf5 !important;
+}
+
+.clickable-row.expanded {
+  background: #e0eff9;
+  border-bottom: none;
+}
+
+.expand-icon {
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--va-blue-light);
+}
+
+.accordion-row td {
+  padding: 0;
+  border-bottom: 2px solid var(--va-blue-light);
+}
+
+.accordion-content {
+  padding: 0.75rem 1rem 0.75rem 2.1rem;
+  background: #f5f9fd;
+  animation: slideDown 0.2s ease-out;
+}
+
+.accordion-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--va-gray);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.accordion-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--va-black);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 500px; }
+}
+
 .pagination {
   display: flex;
   align-items: center;

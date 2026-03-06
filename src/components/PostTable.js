@@ -18,6 +18,9 @@ export default function PostTable({ data }) {
   const [sortKey, setSortKey] = useState("reach");
   const [sortDir, setSortDir] = useState("desc");
   const [page, setPage] = useState(0);
+  const [expandedId, setExpandedId] = useState(null);
+
+  const colCount = SORTABLE_COLS.length + 1; // +1 for Link column
 
   const sorted = useMemo(() => {
     const copy = [...data];
@@ -78,36 +81,57 @@ export default function PostTable({ data }) {
             </tr>
           </thead>
           <tbody>
-            {pageData.map((post, i) => (
-              <tr key={post.postId || i}>
-                <td className="no-wrap">
-                  {post.date ? format(post.date, "MM/dd/yyyy") : "—"}
-                </td>
-                <td className="msg-cell" title={post.postMessage}>
-                  {truncate(post.postMessage)}
-                </td>
-                <td>{post.postType}</td>
-                <td className="num">{post.reach.toLocaleString()}</td>
-                <td className="num">{(post.engagementRate * 100).toFixed(2)}%</td>
-                <td className="num">{post.clicks.toLocaleString()}</td>
-                <td className="num">{post.postEngagement.toLocaleString()}</td>
-                <td className="num">{post.shares.toLocaleString()}</td>
-                <td>
-                  {post.postPermalink ? (
-                    <a
-                      href={post.postPermalink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="View on Facebook"
-                    >
-                      🔗
-                    </a>
-                  ) : (
-                    "—"
+            {pageData.map((post, i) => {
+              const rowKey = post.postId || i;
+              const isExpanded = expandedId === rowKey;
+              return (
+                <React.Fragment key={rowKey}>
+                  <tr
+                    className={`clickable-row${isExpanded ? " expanded" : ""}`}
+                    onClick={() => setExpandedId(isExpanded ? null : rowKey)}
+                  >
+                    <td className="no-wrap">
+                      {post.date ? format(post.date, "MM/dd/yyyy") : "—"}
+                    </td>
+                    <td className="msg-cell">
+                      <span className="expand-icon">{isExpanded ? "▾" : "▸"}</span>
+                      {truncate(post.postMessage)}
+                    </td>
+                    <td>{post.postType}</td>
+                    <td className="num">{post.reach.toLocaleString()}</td>
+                    <td className="num">{(post.engagementRate * 100).toFixed(2)}%</td>
+                    <td className="num">{post.clicks.toLocaleString()}</td>
+                    <td className="num">{post.postEngagement.toLocaleString()}</td>
+                    <td className="num">{post.shares.toLocaleString()}</td>
+                    <td>
+                      {post.postPermalink ? (
+                        <a
+                          href={post.postPermalink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View on Facebook"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          🔗
+                        </a>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                  </tr>
+                  {isExpanded && (
+                    <tr className="accordion-row">
+                      <td colSpan={colCount}>
+                        <div className="accordion-content">
+                          <p className="accordion-label">Full Post Message:</p>
+                          <p className="accordion-text">{post.postMessage || "(no message)"}</p>
+                        </div>
+                      </td>
+                    </tr>
                   )}
-                </td>
-              </tr>
-            ))}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>
