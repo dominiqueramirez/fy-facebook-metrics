@@ -21,6 +21,7 @@ export default function KpiCards({ data }) {
       : 0;
 
   const cards = [
+    { label: "Total Posts", value: fmt(data.length), icon: "📝" },
     { label: "Total Reach", value: fmt(totalReach), icon: "📣" },
     { label: "Total Engagement", value: fmt(totalEngagement), icon: "👍" },
     { label: "Total Clicks", value: fmt(totalClicks), icon: "🖱️" },
