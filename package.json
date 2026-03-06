@@ -2,16 +2,26 @@
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dominiqueramirez.github.io/fy-facebook-metrics",
   "dependencies": {
+    "date-fns": "^4.1.0",
+    "gh-pages": "^6.3.0",
+    "jszip": "^3.10.1",
+    "papaparse": "^5.5.3",
     "react": "^19.2.4",
+    "react-app-rewired": "^2.2.1",
+    "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.4",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "recharts": "^3.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
